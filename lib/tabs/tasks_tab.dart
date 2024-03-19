@@ -7,7 +7,6 @@ import 'package:todo_app/shared/styles/app_colors.dart';
 import 'package:todo_app/providers/task_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 class TasksTab extends StatelessWidget {
   const TasksTab({super.key});
 
@@ -47,7 +46,7 @@ class TasksTab extends StatelessWidget {
                 return Expanded(
                     child: Center(
                         child: Text(
-                          AppLocalizations.of(context)!.wrong,
+                  AppLocalizations.of(context)!.wrong,
                   style: Theme.of(context).textTheme.bodyMedium,
                 )));
               }
@@ -56,7 +55,7 @@ class TasksTab extends StatelessWidget {
                 return Expanded(
                     child: Center(
                         child: Text(
-                          AppLocalizations.of(context)!.no_data,
+                  AppLocalizations.of(context)!.no_data,
                   style: Theme.of(context).textTheme.bodyMedium,
                 )));
               }

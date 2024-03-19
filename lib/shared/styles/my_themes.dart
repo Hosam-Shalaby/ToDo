@@ -22,16 +22,16 @@ class MyThemeData {
       scaffoldBackgroundColor: AppColors.backgroundColor,
       primaryColor: AppColors.primaryColor,
       textTheme: TextTheme(
-        bodySmall: GoogleFonts.roboto(
+        bodySmall: GoogleFonts.cairo(
             fontSize: 12,
             fontWeight: FontWeight.normal,
             color: AppColors.black),
-        bodyMedium: GoogleFonts.poppins(
-            fontSize: 18,
+        bodyMedium: GoogleFonts.cairo(
+            fontSize: 14,
             fontWeight: FontWeight.bold,
             color: AppColors.primaryColor),
-        bodyLarge: GoogleFonts.poppins(
-            fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.white),
+        bodyLarge: GoogleFonts.cairo(
+            fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.black),
       ),
       appBarTheme: const AppBarTheme(
           backgroundColor: AppColors.primaryColor,

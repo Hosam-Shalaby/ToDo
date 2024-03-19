@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:todo_app/providers/sign_up_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:todo_app/screens/login_layout.dart';
+import 'package:todo_app/tabs/widgets/custom_text_form_field.dart';
 
 import '../shared/styles/app_colors.dart';
 
@@ -43,45 +44,37 @@ class SignUpLayout extends StatelessWidget {
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyMedium!
-                                      .copyWith(fontSize: 50),
+                                      .copyWith(fontSize: 30),
                                 ),
                                 const SizedBox(
                                   height: 15,
                                 ),
-                                TextFormField(
-                                  validator: (value) {
-                                    final RegExp nameRegExp =
-                                        RegExp(r'^[a-zA-Z]+$');
+                                CustomTextFormField(
+                                  onChange: (value) {
+                                    // final RegExp nameRegExp =
+                                    //     RegExp(r'^[a-zA-Z]+$');
                                     if (value!.isEmpty) {
                                       return AppLocalizations.of(context)!
                                           .enter_name;
                                     }
-                                    if (!nameRegExp.hasMatch(value)) {
-                                      return AppLocalizations.of(context)!
-                                          .enter_valid_name;
-                                    }
+                                    // if (!nameRegExp.hasMatch(value)) {
+                                    //   return AppLocalizations.of(context)!
+                                    //       .enter_valid_name;
+                                    // }
                                     signUpProvider.setName(value);
                                     return null;
                                   },
-                                  decoration: InputDecoration(
-                                    label: Text(
-                                        AppLocalizations.of(context)!.name),
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(18),
-                                        borderSide: const BorderSide(
-                                            color: AppColors.primaryColor)),
-                                    enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(18),
-                                        borderSide: const BorderSide(
-                                            color: AppColors.primaryColor)),
-                                  ),
+                                  icon: Icons.person,
+                                  obscureText: false,
+                                  hintText:
+                                      Text(AppLocalizations.of(context)!.name),
                                 ),
+
                                 const SizedBox(
                                   height: 15,
                                 ),
-                                TextFormField(
-                                  keyboardType: TextInputType.number,
-                                  validator: (value) {
+                                CustomTextFormField(
+                                  onChange: (value) {
                                     if (value!.isEmpty) {
                                       return AppLocalizations.of(context)!
                                           .enter_age;
@@ -103,24 +96,17 @@ class SignUpLayout extends StatelessWidget {
                                         .setAge(num.parse(value).toInt());
                                     return null;
                                   },
-                                  decoration: InputDecoration(
-                                    label:
-                                        Text(AppLocalizations.of(context)!.age),
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(18),
-                                        borderSide: const BorderSide(
-                                            color: AppColors.primaryColor)),
-                                    enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(18),
-                                        borderSide: const BorderSide(
-                                            color: AppColors.primaryColor)),
-                                  ),
+                                  icon: Icons.password,
+                                  obscureText: false,
+                                  hintText:
+                                      Text(AppLocalizations.of(context)!.age),
                                 ),
+
                                 const SizedBox(
                                   height: 15,
                                 ),
-                                TextFormField(
-                                  validator: (value) {
+                                CustomTextFormField(
+                                  onChange: (value) {
                                     final RegExp emailRegExp = RegExp(
                                         r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.com+");
                                     if (value!.isEmpty) {
@@ -134,25 +120,17 @@ class SignUpLayout extends StatelessWidget {
                                     signUpProvider.setEmail(value);
                                     return null;
                                   },
-                                  decoration: InputDecoration(
-                                    label: Text(
-                                        AppLocalizations.of(context)!.email),
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(18),
-                                        borderSide: const BorderSide(
-                                            color: AppColors.primaryColor)),
-                                    enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(18),
-                                        borderSide: const BorderSide(
-                                            color: AppColors.primaryColor)),
-                                  ),
+                                  icon: Icons.email,
+                                  obscureText: false,
+                                  hintText:
+                                      Text(AppLocalizations.of(context)!.email),
                                 ),
+                                //
                                 const SizedBox(
                                   height: 15,
                                 ),
-                                TextFormField(
-                                  obscureText: !signUpProvider.isObscure,
-                                  validator: (value) {
+                                CustomTextFormField(
+                                  onChange: (value) {
                                     final RegExp passwordRegExp1 =
                                         RegExp(r"^(?=.*[A-Z])");
                                     final RegExp passwordRegExp2 =
@@ -190,34 +168,28 @@ class SignUpLayout extends StatelessWidget {
                                     signUpProvider.setPassword(value);
                                     return null;
                                   },
-                                  decoration: InputDecoration(
-                                    suffixIcon: IconButton(
-                                      icon: Icon(
-                                        signUpProvider.isObscure
-                                            ? Icons.visibility
-                                            : Icons.visibility_off,
-                                      ),
-                                      onPressed: () {
-                                        signUpProvider.changeVisibility();
-                                      },
+                                  visibilityIcon: IconButton(
+                                    icon: Icon(
+                                      signUpProvider.isObscure
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
                                     ),
-                                    label: Text(
-                                        AppLocalizations.of(context)!.password),
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(18),
-                                        borderSide: const BorderSide(
-                                            color: AppColors.primaryColor)),
-                                    enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(18),
-                                        borderSide: const BorderSide(
-                                            color: AppColors.primaryColor)),
+                                    onPressed: () {
+                                      signUpProvider.changeVisibility();
+                                    },
                                   ),
+                                  icon: Icons.lock,
+                                  obscureText: !signUpProvider.isObscure,
+                                  hintText: Text(
+                                      AppLocalizations.of(context)!.password),
                                 ),
+
                                 const SizedBox(
                                   height: 15,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 60),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.stretch,
@@ -242,31 +214,13 @@ class SignUpLayout extends StatelessWidget {
                                         child: Text(
                                           AppLocalizations.of(context)!
                                               .create_acc,
+                                          style: const TextStyle(
+                                              color: Colors.black),
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
-                                /*SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width * .5,
-                                    child: ElevatedButton(
-                                        onPressed: () {
-                                          if (signUpProvider
-                                              .formKey.currentState!
-                                              .validate()) {
-                                            signUpProvider.signUp(
-                                                onSuccess: () {
-                                              Navigator.pop(context);
-                                            }, onError: (message) {
-                                              showSnackbar(context, message);
-                                            });
-                                          }
-                                        },
-                                        child: Text(
-                                            AppLocalizations.of(context)!
-                                                .create_acc))),*/
-                                //Text(signUpProvider.responseCode!="200"?"*${signUpProvider.responseCode.replaceAll("-", " ")}":"",style: TextStyle(color: Colors.red,fontSize: 12),)
                               ],
                             ),
                           ),
@@ -274,12 +228,13 @@ class SignUpLayout extends StatelessWidget {
                       ),
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           AppLocalizations.of(context)!.have_acc,
                           style: Theme.of(context)
                               .textTheme
-                              .bodyMedium!
+                              .bodySmall!
                               .copyWith(color: Colors.grey, fontSize: 14),
                         ),
                         GestureDetector(
@@ -295,6 +250,9 @@ class SignUpLayout extends StatelessWidget {
                           ),
                         ),
                       ],
+                    ),
+                    const SizedBox(
+                      height: 25,
                     ),
                   ],
                 ),

@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:todo_app/providers/main_provider.dart';
 import 'package:todo_app/providers/task_provider.dart';
 import 'package:todo_app/screens/edit_layout.dart';
+import 'package:todo_app/screens/forget_password.dart';
 import 'package:todo_app/screens/home_layout.dart';
 import 'package:todo_app/screens/login_layout.dart';
 import 'package:todo_app/screens/sign_up_layout.dart';
@@ -53,6 +54,7 @@ class MyApp extends StatelessWidget {
           : HomeLayout.routeName,
       routes: {
         SignUpLayout.routeName: (context) => SignUpLayout(),
+        ForgetPassword.routeName: (context) => ForgetPassword(),
         LoginLayout.routeName: (context) => const LoginLayout(),
         HomeLayout.routeName: (context) => const HomeLayout(),
         EditLayout.routeName: (context) => const EditLayout(),

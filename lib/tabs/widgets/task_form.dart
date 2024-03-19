@@ -53,6 +53,7 @@ class TaskForm extends StatelessWidget {
                   height: 15,
                 ),
                 TextFormField(
+                  style: const TextStyle(color: Colors.black),
                   initialValue: task?.title,
                   validator: (text) {
                     if (text == null || text.isEmpty) {
@@ -100,34 +101,87 @@ class TaskForm extends StatelessWidget {
                 ),
                 SizedBox(
                     width: MediaQuery.of(context).size.width * .5,
-                    child: ElevatedButton(
-                        onPressed: () {
-                          if (sheetProvider.formKey.currentState!.validate()) {
-                            if (task != null) {
-                              TaskModel task = TaskModel(
+                    child: GestureDetector(
+                      onTap: () {
+                        if (sheetProvider.formKey.currentState!.validate()) {
+                          if (task != null) {
+                            TaskModel task = TaskModel(
                                 userId: this.task!.userId,
-                                  id: this.task!.id,
-                                  date: sheetProvider
-                                      .selectedDate.millisecondsSinceEpoch,
-                                  title: sheetProvider.title,
-                                  status: false);
-                              taskProvider
-                                  .editTask(task)
-                                  .then((value) => Navigator.pop(context));
-                            } else {
-                              sheetProvider.getCurrentUserId();
-                              TaskModel task = TaskModel(
+                                id: this.task!.id,
+                                date: sheetProvider
+                                    .selectedDate.millisecondsSinceEpoch,
+                                title: sheetProvider.title,
+                                status: false);
+                            taskProvider
+                                .editTask(task)
+                                .then((value) => Navigator.pop(context));
+                          } else {
+                            sheetProvider.getCurrentUserId();
+                            TaskModel task = TaskModel(
                                 userId: sheetProvider.currentUserId!,
-                                  date: sheetProvider.selectedDate.millisecondsSinceEpoch,
-                                  title: sheetProvider.title,
-                                  status: false);
-                              taskProvider.addTask(task);
-                            }
+                                date: sheetProvider
+                                    .selectedDate.millisecondsSinceEpoch,
+                                title: sheetProvider.title,
+                                status: false);
+                            taskProvider.addTask(task);
                           }
-                        },
-                        child: Text(task == null
-                            ? AppLocalizations.of(context)!.add
-                            : AppLocalizations.of(context)!.edit)))
+                        }
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(5),
+                        // height: 20,
+                        // width: 40,
+                        decoration: BoxDecoration(
+                            // color: color,
+                            borderRadius: BorderRadius.circular(50),
+                            border: Border.all(color: Colors.black
+                                //  Colors.white60
+                                )),
+                        child: Center(
+                          child: Text(
+                            task == null
+                                ? AppLocalizations.of(context)!.add
+                                : AppLocalizations.of(context)!.edit,
+                            style: const TextStyle(
+                                fontSize: 16,
+                                // color: Colors.white,
+                                fontFamily: 'cairo'),
+                          ),
+                        ),
+                      ),
+                    )
+                    // ElevatedButton(
+                    //     onPressed: () {
+                    //       if (sheetProvider.formKey.currentState!
+                    //           .validate()) {
+                    //         if (task != null) {
+                    //           TaskModel task = TaskModel(
+                    //               userId: this.task!.userId,
+                    //               id: this.task!.id,
+                    //               date: sheetProvider
+                    //                   .selectedDate.millisecondsSinceEpoch,
+                    //               title: sheetProvider.title,
+                    //               status: false);
+                    //           taskProvider
+                    //               .editTask(task)
+                    //               .then((value) => Navigator.pop(context));
+                    //         } else {
+                    //           sheetProvider.getCurrentUserId();
+                    //           TaskModel task = TaskModel(
+                    //               userId: sheetProvider.currentUserId!,
+                    //               date: sheetProvider
+                    //                   .selectedDate.millisecondsSinceEpoch,
+                    //               title: sheetProvider.title,
+                    //               status: false);
+                    //           taskProvider.addTask(task);
+                    //         }
+                    //       }
+                    //     },
+                    //     child: Text(task == null
+                    //         ? AppLocalizations.of(context)!.add
+                    //         : AppLocalizations.of(context)!.edit)
+                    )
               ],
             ),
           ),
